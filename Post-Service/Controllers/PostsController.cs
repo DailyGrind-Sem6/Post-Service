@@ -14,10 +14,17 @@ namespace Post_Service.Controllers
             _logger = logger;
         }
 
-        [HttpGet("/")]
-        public IActionResult Get()
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return Ok("Posts");
+            return Ok("bzbz 🐝");
+        }
+        
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult GetById(string id)
+        {
+            return Ok("Post: " + id);
         }
     }
 }
