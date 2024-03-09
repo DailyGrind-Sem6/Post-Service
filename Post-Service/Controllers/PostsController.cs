@@ -17,14 +17,14 @@ namespace Post_Service.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok("bzbz 🐝");
+            return Ok(new { message = "bzbz 🐝" });
         }
         
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(string id)
         {
-            return Ok("Post: " + id);
+            return Ok(new { message = "Post: " + id});
         }
     }
 }
