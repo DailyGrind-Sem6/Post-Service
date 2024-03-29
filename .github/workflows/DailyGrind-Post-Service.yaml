@@ -6,7 +6,7 @@ name: DailyGrind-Post-Service
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: Sem-6
-    AZURE_CONTAINER_REGISTRY: dailygrind
+    AZURE_CONTAINER_REGISTRY: acrworkflow1711726763385
     CLUSTER_NAME: DailyGrind
     CLUSTER_RESOURCE_GROUP: Sem-6
     CONTAINER_NAME: image-workflow-1711726763385
