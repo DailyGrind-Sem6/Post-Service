@@ -45,4 +45,3 @@ jobs:
                 action: deploy
                 images: tendeza/sem6-post-service
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: namespace-workflow-1711726763385
