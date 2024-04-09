@@ -15,4 +15,9 @@ public class PostService : IPostService
     {
         return _repository.GetAll();
     }
+    
+    public Task<Post> CreatePost(Post post)
+    {
+        return _repository.Create(post);
+    }
 }
