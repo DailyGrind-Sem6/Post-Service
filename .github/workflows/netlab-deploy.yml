@@ -7,8 +7,8 @@ on:
 
 env:
   DEPLOYMENT_MANIFEST_PATH: |
-    ./Manifest/post-service-deployment.yaml
     ./Manifest/post-service-service.yaml
+    ./Manifest/post-service-deployment.yaml
 
 jobs:
   deploy:
