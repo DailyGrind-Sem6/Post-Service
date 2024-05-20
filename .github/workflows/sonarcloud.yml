@@ -2,6 +2,18 @@ name: SonarCloud
 on:
   pull_request:
     branches: [ "main" ]
+
+env:
+    ACR_RESOURCE_GROUP: Sem-6
+    AZURE_CONTAINER_REGISTRY: acrworkflow1714126575894
+    CLUSTER_NAME: DailyGrind
+    CLUSTER_RESOURCE_GROUP: Sem-6
+    CONTAINER_NAME: image-workflow-1714126575894
+    DEPLOYMENT_MANIFEST_PATH: |
+        ./Manifest/post-service-deployment.yaml
+        ./Manifest/post-service-service.yaml
+
+        
 jobs:
   build:
     name: Build and analyze
