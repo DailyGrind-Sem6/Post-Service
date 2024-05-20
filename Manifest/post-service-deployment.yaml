@@ -9,7 +9,6 @@ metadata:
     io.kompose.service: post-service
   name: post-service
 spec:
-  replicas: 3
   selector:
     matchLabels:
       io.kompose.service: post-service
@@ -29,6 +28,9 @@ spec:
           name: post-service
           ports:
             - containerPort: 8081
-          resources: {}
+          resources:
+            limits:
+                cpu: "1000m"
+                memory: "1000Mi"
       restartPolicy: Always
 status: {}
