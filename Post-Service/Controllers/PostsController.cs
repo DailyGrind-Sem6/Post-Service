@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Post_Service.Entities;
 using Post_Service.Services;
 
@@ -30,7 +31,16 @@ namespace Post_Service.Controllers
         [Route("{id}")]
         public IActionResult GetById(string id)
         {
-            return Ok(new { message = "Post: " + id});
+            try
+            {
+                var post = _service.GetPostById(id);
+                
+                return Ok(post);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
         
         [HttpPost]

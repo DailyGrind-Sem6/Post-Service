@@ -73,5 +73,33 @@ namespace Post_Service_Test
                 Assert.That(posts.Count, Is.GreaterThan(0));
             });
         }
+        
+        [Test]
+        public async Task GetById_Returns_Correct_Post()
+        {
+            // Arrange
+            var newPost = TestData.singlePost();
+            var createResponse = await _client.PostAsJsonAsync("/api/posts", newPost);
+            createResponse.EnsureSuccessStatusCode();
+            var createdPost = await createResponse.Content.ReadFromJsonAsync<Post>();
+
+            // Act
+            var response = await _client.GetAsync($"/api/posts/{createdPost.Id}");
+
+            var content = await response.Content.ReadAsStringAsync();
+    
+            var retrievedPost = await response.Content.ReadFromJsonAsync<Post>();
+
+            Console.WriteLine("Retrieved post ID: " + retrievedPost.Id);
+            Console.WriteLine("Created post ID: " + createdPost.Id);
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(response.Content.Headers.ContentType?.MediaType, Is.EqualTo("application/json"));
+                Assert.That(retrievedPost, Is.Not.Null);
+                Assert.That(retrievedPost.Id, Is.EqualTo(createdPost.Id));
+            });
+        }
     }
 }

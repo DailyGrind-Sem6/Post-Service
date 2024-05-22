@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using Post_Service.Entities;
 using Post_Service.Repositories;
 
@@ -15,7 +16,18 @@ public class PostService : IPostService
     {
         return _repository.GetAll();
     }
-    
+
+    public Post GetPostById(string id)
+    {
+        var post = _repository.Get(id).Result;
+        if (post == null)
+        {
+            throw new Exception("Post not found");
+        }
+
+        return post;
+    }
+
     public Task<Post> CreatePost(Post post)
     {
         return _repository.Create(post);
