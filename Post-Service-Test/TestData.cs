@@ -1,54 +1,51 @@
-using MongoDB.Bson;
 using Post_Service.Entities;
+using System;
 
-namespace Post_Service_Test;
-
-public static class TestData
+namespace Post_Service_Test
 {
-    public static Post singlePost()
+    public static class TestData
     {
-        return new Post()
+        public static Post singlePost()
         {
-            Id = ObjectId.GenerateNewId(),
-            Title = Guid.NewGuid().ToString(),
-            Content = Guid.NewGuid().ToString(),
-            CreatedAt = DateTime.Now,
-            UpdatedAt = DateTime.Now,
-            UserId = Guid.NewGuid().ToString()
-        };
-    }
-    
-    public static List<Post> multiplePosts()
-    {
-        return new List<Post>()
+            return new Post()
+            {
+                Title = Guid.NewGuid().ToString(),
+                Content = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                UserId = Guid.NewGuid().ToString()
+            };
+        }
+
+        public static List<Post> multiplePosts()
         {
-            new Post()
+            return new List<Post>()
             {
-                Id = ObjectId.GenerateNewId(),
-                Title = Guid.NewGuid().ToString(),
-                Content = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                UserId = Guid.NewGuid().ToString()
-            },
-            new Post()
-            {
-                Id = ObjectId.GenerateNewId(),
-                Title = Guid.NewGuid().ToString(),
-                Content = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                UserId = Guid.NewGuid().ToString()
-            },
-            new Post()
-            {
-                Id = ObjectId.GenerateNewId(),
-                Title = Guid.NewGuid().ToString(),
-                Content = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                UserId = Guid.NewGuid().ToString()
-            }
-        };
+                new Post()
+                {
+                    Title = Guid.NewGuid().ToString(),
+                    Content = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = Guid.NewGuid().ToString()
+                },
+                new Post()
+                {
+                    Title = Guid.NewGuid().ToString(),
+                    Content = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = Guid.NewGuid().ToString()
+                },
+                new Post()
+                {
+                    Title = Guid.NewGuid().ToString(),
+                    Content = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = Guid.NewGuid().ToString()
+                }
+            };
+        }
     }
 }
