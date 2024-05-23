@@ -101,5 +101,57 @@ namespace Post_Service_Test
                 Assert.That(retrievedPost.Id, Is.EqualTo(createdPost.Id));
             });
         }
+        
+        [Test]
+        public async Task Remove_Deletes_Post()
+        {
+            // Arrange
+            var newPost = TestData.singlePost();
+            var createResponse = await _client.PostAsJsonAsync("/api/posts", newPost);
+            createResponse.EnsureSuccessStatusCode();
+            var createdPost = await createResponse.Content.ReadFromJsonAsync<Post>();
+
+            // Act
+            var deleteResponse = await _client.DeleteAsync($"/api/posts/{createdPost.Id}");
+            deleteResponse.EnsureSuccessStatusCode();
+
+            var getResponse = await _client.GetAsync($"/api/posts/{createdPost.Id}");
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(deleteResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(getResponse.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+            });
+        }
+
+        [Test]
+        public async Task Update_Updates_Post()
+        {
+            // Arrange
+            var newPost = TestData.singlePost();
+            var createResponse = await _client.PostAsJsonAsync("/api/posts", newPost);
+            createResponse.EnsureSuccessStatusCode();
+            var createdPost = await createResponse.Content.ReadFromJsonAsync<Post>();
+
+            createdPost.Title = "Updated Title";
+            createdPost.Content = "Updated Content";
+
+            // Act
+            var updateResponse = await _client.PutAsJsonAsync($"/api/posts/{createdPost.Id}", createdPost);
+            updateResponse.EnsureSuccessStatusCode();
+
+            var getResponse = await _client.GetAsync($"/api/posts/{createdPost.Id}");
+            var updatedPost = await getResponse.Content.ReadFromJsonAsync<Post>();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(updateResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(getResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(updatedPost.Title, Is.EqualTo("Updated Title"));
+                Assert.That(updatedPost.Content, Is.EqualTo("Updated Content"));
+            });
+        }
     }
 }
