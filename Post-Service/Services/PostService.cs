@@ -32,4 +32,24 @@ public class PostService : IPostService
     {
         return _repository.Create(post);
     }
+
+    public async Task UpdatePost(string id, Post post)
+    {
+        var existingPost = await _repository.Get(id);
+
+        if (existingPost == null)
+        {
+            throw new Exception("Post not found");
+        }
+        
+        post.Id = existingPost.Id;
+        post.UserId = existingPost.UserId;
+
+        await _repository.Update(id, post);
+    }
+
+    public Task RemovePost(string id)
+    {
+        return _repository.Remove(id);
+    }
 }

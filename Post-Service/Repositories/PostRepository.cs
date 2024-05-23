@@ -36,7 +36,8 @@ public class PostRepository : IPostRepository
     
     public async Task Update(string id, Post postIn)
     {
-        await _posts.ReplaceOneAsync(post => post.Id == id, postIn);
+        var filter = Builders<Post>.Filter.Eq(post => post.Id, id);
+        await _posts.ReplaceOneAsync(filter, postIn);
     }
     
     public async Task Remove(string id)

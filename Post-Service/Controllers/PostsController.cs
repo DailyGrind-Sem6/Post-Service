@@ -50,6 +50,22 @@ namespace Post_Service.Controllers
             var createdPost = await _service.CreatePost(post);
             return Ok(createdPost);
         }
+        
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdatePost(string id, [FromBody] Post post)
+        {
+            await _service.UpdatePost(id, post);
+            return Ok();
+        }
 
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemovePost(string id)
+        {
+            await _service.RemovePost(id);
+            return Ok();
+        }
     }
 }
