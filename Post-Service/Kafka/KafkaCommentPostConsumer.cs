@@ -30,8 +30,8 @@ public class KafkaCommentPostConsumer : IHostedService
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _consumer.Subscribe("test-topic");
-        _logger.LogInformation("Subscribed to test-topic...");
+        _consumer.Subscribe("comment-created");
+        _logger.LogInformation("Subscribed to comment-created...");
 
         Task.Run(() =>
         {
@@ -43,7 +43,8 @@ public class KafkaCommentPostConsumer : IHostedService
 
                     var message = consumeResult.Message.Value;
 
-                    _logger.LogInformation($"Received message: {message}");
+                    _logger.LogInformation("Received message...");
+                    _logger.LogInformation($"Updating CommentCount of post: {message}");
                 }
                 catch (OperationCanceledException ex)
                 {
