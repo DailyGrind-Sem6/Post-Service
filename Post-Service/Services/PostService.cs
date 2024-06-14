@@ -44,6 +44,7 @@ public class PostService : IPostService
         
         post.Id = existingPost.Id;
         post.UserId = existingPost.UserId;
+        post.CommentCount = existingPost.CommentCount;
 
         await _repository.Update(id, post);
     }
@@ -51,5 +52,15 @@ public class PostService : IPostService
     public Task RemovePost(string id)
     {
         return _repository.Remove(id);
+    }
+    
+    public Task IncrementCommentCount(string postId)
+    {
+        return _repository.IncrementCommentCount(postId);
+    }
+    
+    public Task DecrementCommentCount(string postId)
+    {
+        return _repository.DecrementCommentCount(postId);
     }
 }

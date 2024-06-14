@@ -12,4 +12,8 @@ public interface IPostService
     public Task UpdatePost(string id, Post post);
     
     public Task RemovePost(string id);
+    
+    public Task IncrementCommentCount(string postId);
+    
+    public Task DecrementCommentCount(string postId);
 }

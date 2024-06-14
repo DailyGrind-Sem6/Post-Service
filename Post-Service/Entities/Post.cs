@@ -15,4 +15,5 @@ public class Post
     public DateTime UpdatedAt { get; set; }
         
     public string? UserId { get; set; }
+    public int CommentCount { get; set; }
 }
