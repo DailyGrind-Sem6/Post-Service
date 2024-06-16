@@ -10,4 +10,6 @@ public interface IPostRepository
     public Task<Post> Create(Post post);
     public Task Update(string id, Post postIn);
     public Task Remove(string id);
+    public Task IncrementCommentCount(string postId);
+    public Task DecrementCommentCount(string postId);
 }

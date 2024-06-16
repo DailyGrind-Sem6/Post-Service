@@ -44,4 +44,18 @@ public class PostRepository : IPostRepository
     {
         await _posts.DeleteOneAsync(post => post.Id == id);
     }
+    
+    public async Task IncrementCommentCount(string postId)
+    {
+        var filter = Builders<Post>.Filter.Eq(post => post.Id, postId);
+        var update = Builders<Post>.Update.Inc(post => post.CommentCount, 1);
+        await _posts.UpdateOneAsync(filter, update);
+    }
+    
+    public async Task DecrementCommentCount(string postId)
+    {
+        var filter = Builders<Post>.Filter.Eq(post => post.Id, postId);
+        var update = Builders<Post>.Update.Inc(post => post.CommentCount, -1);
+        await _posts.UpdateOneAsync(filter, update);
+    }
 }
