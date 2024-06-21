@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Post_Service.Entities;
+using Post_Service.Kafka;
 using Post_Service.Repositories;
 using Post_Service.Services;
 
@@ -21,6 +22,7 @@ builder.Services.AddSingleton<IPostService, PostService>();
 
 builder.Services.AddSingleton<IMongoClient>(new MongoClient(builder.Configuration.GetValue<string>("PostDatabase:ConnectionString")));
 
+builder.Services.AddHostedService<KafkaCommentPostConsumer>();
 
 var app = builder.Build();
 
